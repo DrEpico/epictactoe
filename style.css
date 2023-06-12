@@ -1,0 +1,26 @@
+/* #top-container {
+    
+} */
+
+#board-container {
+    max-width: 15%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 20vh auto;
+}
+
+#a1, #a2, #a3, #b1, #b2, 
+#b3, #c1, #c2, #c3 {
+    width: 90px;
+    height: 80px;
+    margin: auto;
+    border: 1px solid gray;
+    /* border-radius: 6px; */
+    font-size: 30px;
+    text-align: center;
+    
+}
