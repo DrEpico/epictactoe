@@ -13,11 +13,26 @@ const gameBoard = (() => {
 })();
 
 const findWinner = (() => {
-    const rows = document.querySelectorAll(".R1 .R2. R3"); //add forEach later
-    if (rows.innerHTML == null){
-        return console.log("default")
-    }
-}) 
+    const rows = [
+        document.querySelectorAll(".R1"),
+        document.querySelectorAll(".R2"),
+        document.querySelectorAll(".R3")
+    ];
+
+    rows.forEach(row => {
+        let isEmpty = true;
+        row.forEach(cell => {
+            if (cell.innerHTML !== "") {
+                isEmpty = false;
+                return;
+            }
+        });
+
+        if (isEmpty) {
+            console.log("this row is empty");
+        }
+    });
+});
 
 function Player(name, number, marker) {
     this.name = name;
@@ -42,7 +57,6 @@ function startGame() {
 const cells = document.querySelectorAll("#board-container div");
 const cellArray = Array.from(cells);
 
-// Add event listeners to each cell
 cellArray.forEach(cell => {
     cell.addEventListener("click", () => {
         cell.innerHTML = "X";
