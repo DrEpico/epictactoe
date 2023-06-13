@@ -12,28 +12,39 @@ const gameBoard = (() => {
     });
 })();
 
-const gameStart = (() => {
-    function Player(name, number, marker){
-        this.name = name
-        this.number = number
-        this.marker = marker
-        this.sayName = function() {
-            console.log(name)
-        }
-    }  
+const findWinner = (() => {
+    const rows = document.querySelectorAll(".R1 .R2. R3"); //add forEach later
+    if (rows.innerHTML == null){
+        return console.log("default")
+    }
+}) 
 
-    const playerOne =  new Player(prompt("Enter the first player's name"), 1, "X");
-    const playerTwo =  new Player(prompt("Enter the second player's name"), 2, "O");  
-    
+function Player(name, number, marker) {
+    this.name = name;
+    this.number = number;
+    this.marker = marker;
+    this.sayName = function() {
+        console.log(name);
+    };
+}
+
+let playerOne;
+let playerTwo;
+
+function startGame() {
+    playerOne = new Player(prompt("Enter the first player's name"), 1, "X");
+    playerTwo = new Player(prompt("Enter the second player's name"), 2, "O");
+
     playerOne.sayName();
     playerTwo.sayName();
+}
 
-    return {
-        playerOne,
-        playerTwo
-    }
-})
+const cells = document.querySelectorAll("#board-container div");
+const cellArray = Array.from(cells);
 
-
-const gameData = gameStart(); 
-console.log(gameData.playerOne,gameData.playerTwo); 
+// Add event listeners to each cell
+cellArray.forEach(cell => {
+    cell.addEventListener("click", () => {
+        cell.innerHTML = "X";
+    });
+});
