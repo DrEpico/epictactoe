@@ -12,27 +12,28 @@ const gameBoard = (() => {
     });
 })();
 
-const findWinner = (() => {
+let test = true;
+
+const findWinner = () => {
     const rows = [
         document.querySelectorAll(".R1"),
         document.querySelectorAll(".R2"),
         document.querySelectorAll(".R3")
     ];
 
+    console.log("test 1")
+
     rows.forEach(row => {
-        let isEmpty = true;
-        row.forEach(cell => {
-            if (cell.innerHTML !== "") {
-                isEmpty = false;
-                return;
+        Array.from(row).forEach(cell => {
+            if (cell.textContent === "X") {
+                console.log("X has occupied a row");
+            }
+            if (test === true) {
+                console.log("test 2");
             }
         });
-
-        if (isEmpty) {
-            console.log("this row is empty");
-        }
     });
-});
+};
 
 function Player(name, number, marker) {
     this.name = name;
