@@ -26,10 +26,10 @@ const findWinner = () => {
     rows.forEach(row => {
         Array.from(row).forEach(cell => {
             if (cell.textContent === "X") {
-                console.log("X has occupied a row");
+                console.log("X has occupied a row")
             }
             if (test === true) {
-                console.log("test 2");
+                console.log("test 2")
             }
         });
     });
