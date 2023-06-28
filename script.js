@@ -74,7 +74,7 @@ const displayController = (() => {
 })();
 
 const Gameboard = (() => {
-    let gameboard = ["", "", "", "", "", ""," ", "", ""]
+    let gameboard = ["", "", "", "", "", "", "", "", ""];
 
     const render = () => {
         let boardHTML = "";
@@ -122,11 +122,8 @@ const Game = (() => {
         currentPlayerIndex = 0;
         gameOver = false;
         Gameboard.render();
-        // const squares = document.querySelectorAll(".square");
-        // squares.forEach((square) => {
-        //     square.addEventListener("click", handleClick);
-        // })
-        document.getElementById("#message").innerHTML = "";
+    
+        document.getElementById("message").innerHTML = "";
         document.querySelectorAll(".square").forEach((square) => {
             square.addEventListener("click", handleClick);
         });
@@ -155,12 +152,11 @@ const Game = (() => {
     }
 
     const restart = () => {
-        for (let i = 0; i = 8; i++){
+        for (let i = 0; i < 9; i++) {
             Gameboard.update(i, "");
         }
         Gameboard.render();
         gameOver = false;
-        // document.querySelector("#message").innerHTML = "";
     }
 
     return {
@@ -172,13 +168,13 @@ const Game = (() => {
 
 function checkForWin(board) {
     const winningCombinations = [
-        [0, 1, 2]
-        [3, 4, 5]
-        [6, 7, 8]
-        [0, 3, 6]
-        [1, 4, 7]
-        [2, 5, 8]
-        [0, 4, 8]
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
         [2, 4, 6]
     ]
     for (let i = 0; i < winningCombinations.length; i++){
