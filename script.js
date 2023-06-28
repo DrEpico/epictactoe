@@ -64,6 +64,15 @@
 //     });
 // });
 
+const displayController = (() => {
+    const renderMessage = (message) => {
+        document.querySelector("#message").innerHTML = message; 
+    }
+    return {
+        renderMessage
+    }
+})();
+
 const Gameboard = (() => {
     let gameboard = ["", "", "", "", "", ""," ", "", ""]
 
@@ -109,37 +118,49 @@ const Game = (() => {
         players = [
             createPlayer(document.querySelector("#player1").value, "X"), 
             createPlayer(document.querySelector("#player2").value, "O")
-        ]
+        ];
         currentPlayerIndex = 0;
         gameOver = false;
         Gameboard.render();
-        const square = document.querySelectorAll(".square");
-        square.forEach((square) => {
-            square.addEventListener("click", Game.handleClick);
-        })
-    }
+        // const squares = document.querySelectorAll(".square");
+        // squares.forEach((square) => {
+        //     square.addEventListener("click", handleClick);
+        // })
+        document.getElementById("#message").innerHTML = "";
+        document.querySelectorAll(".square").forEach((square) => {
+            square.addEventListener("click", handleClick);
+        });
+    };
 
     const handleClick = (event) => {
+        if (gameOver) {
+            return;
+        }
         let index = parseInt(event.target.id.split("-")[1]);
         if (Gameboard.getGameBoard()[index] !== "")
             return;
 
         Gameboard.update(index, players[currentPlayerIndex].mark);
 
-        if(checkForWin(Gameboard.getGameBoard(),players[currentPlayerIndex].mark)){
+        if(checkForWin(Gameboard.getGameBoard(), players[currentPlayerIndex].mark)){
             gameOver = true;
-            alert(`${players[currentPlayerIndex].name} won!`)
+            displayController.renderMessage(`${players[currentPlayerIndex].name} wins`)
+        } else if (checkForTie(Gameboard.getGameBoard())){
+            gameOver = true;
+            displayController.renderMessage(`It's tie`)
         }
-
+        
 
         currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
     }
 
     const restart = () => {
-        for (let i = 0; i < 9; i++){
+        for (let i = 0; i = 8; i++){
             Gameboard.update(i, "");
         }
         Gameboard.render();
+        gameOver = false;
+        // document.querySelector("#message").innerHTML = "";
     }
 
     return {
@@ -167,6 +188,10 @@ function checkForWin(board) {
         }       
     }
     return false;
+}
+
+function checkForTie (board) {
+    return board.every(cell => cell !== "")
 }
 
 const restartButton = document.querySelector("#restart-button");
